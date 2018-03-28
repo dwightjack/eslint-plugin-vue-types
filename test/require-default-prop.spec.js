@@ -1,4 +1,4 @@
-const rule = require('../../eslint/require-default-prop')
+const rule = require('../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
 const parserOptions = {
   ecmaVersion: 6,
@@ -6,7 +6,11 @@ const parserOptions = {
   sourceType: 'module'
 }
 
-const ruleTester = new RuleTester()
+const settings = {
+  'vue-types/namespace': ['VueTypes']
+}
+
+const ruleTester = new RuleTester({ parserOptions, settings })
 ruleTester.run('require-default-prop', rule, {
 
   valid: [
@@ -27,8 +31,7 @@ ruleTester.run('require-default-prop', rule, {
             }
           }
         }
-      `,
-      parserOptions
+      `
     },
     {
       filename: 'test.vue',
@@ -47,8 +50,7 @@ ruleTester.run('require-default-prop', rule, {
             }
           }
         }
-      `,
-      parserOptions
+      `
     },
     {
       filename: 'test.vue',
@@ -75,8 +77,7 @@ ruleTester.run('require-default-prop', rule, {
             }
           }
         }
-      `,
-      parserOptions
+      `
     }
   ],
 
