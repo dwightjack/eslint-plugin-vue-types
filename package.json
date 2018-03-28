@@ -1,0 +1,42 @@
+{
+  "name": "eslint-plugin-vue-types",
+  "version": "0.1.0",
+  "description": "eslint-plugin-vue integration plugin",
+  "author": "Marco Solazzi",
+  "license": "MIT",
+  "homepage": "https://github.com/dwightjack/eslint-plugin-vue-types",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run lint && npm run test",
+    "test": "mocha \"test/**/*.spec.js\"",
+    "lint": "eslint lib/*.js test/*.js"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "eslint",
+    "eslintplugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dwightjack/eslint-plugin-vue-types.git"
+  },
+  "peerDependencies": {
+      "eslint": ">=3.18.0",
+      "eslint-plugin-vue": "^4.0.0"
+  },
+  "bugs": "https://github.com/dwightjack/eslint-plugin-vue-types/issues",
+  "devDependencies": {
+    "eslint": ">=3.18.0",
+    "eslint-plugin-vue": "4.4.0",
+    "eslint-plugin-vue-libs": "2.1.0",
+    "expect": "1.20.2",
+    "mocha": "5.0.2"
+  },
+  "dependencies": {
+    "eslint-rule-composer": "0.1.1"
+  }
+}
