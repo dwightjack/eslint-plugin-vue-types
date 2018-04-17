@@ -2,8 +2,7 @@
 
 > ESLint plugin for [vue-types](https://github.com/dwightjack/vue-types) and [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)
 
-This plugin makes ignores error reported by [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) when using [vue-types](https://github.com/dwightjack/vue-types) for prop definitions (see [this issue](https://github.com/dwightjack/vue-types/issues/29) for details).
-.
+This plugin should be used alongside [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) to validate usages of [vue-types](https://github.com/dwightjack/vue-types) on prop definitions (see [this issue](https://github.com/dwightjack/vue-types/issues/29) for details).
 
 ## Requirements
 
@@ -21,9 +20,7 @@ npm install --save-dev eslint eslint-plugin-vue eslint-plugin-vue-types
 
 ## Usage
 
-This plugin should be used alongside [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) to validate usages of [vue-types](https://github.com/dwightjack/vue-types) on prop definitions.
-
-It does so by providing extended versions of some [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) rules:
+This plugin provides the following [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) rule:
 
 * `vue-types/require-default-prop`: extends [`vue/require-default-prop`](https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/require-default-prop.md) allowing `VueTypes` methods.
 
