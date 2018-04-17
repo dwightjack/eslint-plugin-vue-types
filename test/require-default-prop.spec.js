@@ -85,3 +85,35 @@ ruleTester.run('require-default-prop', rule, {
 
   ]
 })
+
+const ruleTesterCustom = new RuleTester({ parserOptions, settings: {
+  'vue-types/namespace': ['VueTypes', 'AppTypes']
+}})
+ruleTesterCustom.run('require-default-prop custom settings', rule, {
+
+  valid: [
+    {
+      filename: 'test.vue',
+      code: `
+        const AppTypes = {
+          theme: VueTypes.oneOf(['dark', 'light'])
+        }
+        export default {
+          props: {
+            a: {
+              type: Number,
+              required: true
+            },
+            b: VueTypes.string,
+            c: AppTypes.theme
+          }
+        }
+      `
+    }
+  ],
+
+  invalid: [
+
+  ]
+})
+
