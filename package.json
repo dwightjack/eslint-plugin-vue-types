@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue-types",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "eslint-plugin-vue integration plugin for vue-types",
   "author": "Marco Solazzi",
   "license": "MIT",
@@ -36,10 +36,10 @@
   },
   "bugs": "https://github.com/dwightjack/eslint-plugin-vue-types/issues",
   "devDependencies": {
-    "eslint": "5.4.0",
-    "eslint-plugin-vue": "^4.7.1",
-    "eslint-plugin-vue-libs": "3.0.0",
-    "mocha": "5.2.0"
+    "eslint": ">=3.18.0",
+    "eslint-plugin-vue": "^4.4.0",
+    "eslint-plugin-vue-libs": "2.1.0",
+    "mocha": "5.1.0"
   },
   "dependencies": {
     "eslint-rule-composer": "^0.3.0"
