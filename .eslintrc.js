@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
-  extends: 'plugin:vue-libs/recommended',
+  extends: ['plugin:vue-libs/recommended'],
   env: {
-    'node': true,
+    node: true
   }
 }
