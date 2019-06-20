@@ -36,10 +36,12 @@
   },
   "bugs": "https://github.com/dwightjack/eslint-plugin-vue-types/issues",
   "devDependencies": {
+    "@typescript-eslint/parser": "^1.10.2",
     "eslint": "^4.7.0",
     "eslint-plugin-vue": "^4.5.0",
     "eslint-plugin-vue-libs": "^3.0.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "typescript": "^3.5.2"
   },
   "dependencies": {
     "eslint-rule-composer": "^0.3.0"
