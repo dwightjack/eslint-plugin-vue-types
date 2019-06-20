@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue-types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "eslint-plugin-vue integration plugin for vue-types",
   "author": "Marco Solazzi",
   "license": "MIT",
