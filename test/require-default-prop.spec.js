@@ -139,7 +139,7 @@ ruleTesterTS.run('require-default-prop with @typescript-eslint/parser', rule, {
           }
         }
       `
-    },
+    }
   ],
 
   invalid: [
