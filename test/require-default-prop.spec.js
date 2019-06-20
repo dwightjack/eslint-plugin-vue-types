@@ -117,3 +117,33 @@ ruleTesterCustom.run('require-default-prop custom settings', rule, {
   ]
 })
 
+const ruleTesterTS = new RuleTester({ parserOptions, settings, parser: require.resolve('@typescript-eslint/parser') })
+ruleTesterTS.run('require-default-prop with @typescript-eslint/parser', rule, {
+
+  valid: [
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            a: {
+              type: Number,
+              required: true
+            },
+            b: VueTypes.string,
+            c: {
+              type: Number,
+              default: 0,
+              required: false
+            }
+          }
+        }
+      `
+    },
+  ],
+
+  invalid: [
+
+  ]
+})
+
