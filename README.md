@@ -21,9 +21,9 @@ npm install --save-dev eslint eslint-plugin-vue eslint-plugin-vue-types
 
 ## Usage
 
-This plugin provides a single rule `vue-types/require-default-prop`.
+This plugin provides a single rule: `vue-types/require-default-prop`.
 
-The rule extends [`vue/require-default-prop`](https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/require-default-prop.md) preventing it from reporting errors for props using `VueTypes` namespaced validators (like `VueTypes.string` or `VueTypes.oneOf([...])`).
+The rule extends [`vue/require-default-prop`](https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/require-default-prop.md) preventing it from reporting errors for props defined with `VueTypes` namespaced validators (like `VueTypes.string` or `VueTypes.oneOf([...])`).
 
 It also allows individually imported validators like in the following example:
 
@@ -54,7 +54,7 @@ In your eslint configuration add `plugin:vue-types/strongly-recommended` **after
 
 ### Custom namespaces
 
-By default `vue-types/require-default-prop` will not report `vue-types` when used with the `VueTypes` namespace.
+By default `vue-types/require-default-prop` will not report VueTypes validators when used with the `VueTypes` namespace.
 
 ```js
 import VueTypes from 'vue-types'
@@ -69,7 +69,7 @@ export default {
 }
 ```
 
-To prevent this error you can wrap custom definition in a namespace and add it to the plugin's allowed namespaces:
+To prevent this error you can wrap custom validators in a namespace and add it to the plugin's allowed namespaces:
 
 ```json
 // .eslintrc.json
@@ -136,4 +136,4 @@ export default {
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2020 Marco Solazzi
+Copyright (c) 2018-2020 Marco Solazzi
