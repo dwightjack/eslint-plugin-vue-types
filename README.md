@@ -2,15 +2,16 @@
 
 > ESLint plugin for [vue-types](https://github.com/dwightjack/vue-types) and [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)
 
+**Warning: This is the documentation for eslint-plugin-vue-types@^2.0.0. The documentation for v.1 is available [here](https://github.com/dwightjack/eslint-plugin-vue-types/blob/v1/README.md).**
+
 This plugin should be used alongside [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) to validate usages of [vue-types](https://github.com/dwightjack/vue-types) on prop definitions (see [this issue](https://github.com/dwightjack/vue-types/issues/29) for details).
 
 ## Requirements
 
-* [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) `^4.4.0`
-- [ESLint](http://eslint.org/) `>=3.18.0`.
-  - `>=4.7.0` to use `eslint --fix`.
-  - `>=4.14.0` to use with `babel-eslint`.
-- Node.js `>=4.0.0`
+- [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) `>=6.0.0`
+
+* [ESLint](http://eslint.org/) `>=5.0.0`.
+* Node.js `>=10.0.0`
 
 ## Installation
 
@@ -20,26 +21,38 @@ npm install --save-dev eslint eslint-plugin-vue eslint-plugin-vue-types
 
 ## Usage
 
-This plugin provides the following [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) rule:
+This plugin provides a single rule `vue-types/require-default-prop`.
 
-* `vue-types/require-default-prop`: extends [`vue/require-default-prop`](https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/require-default-prop.md) allowing `VueTypes` methods.
+The rule extends [`vue/require-default-prop`](https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/require-default-prop.md) preventing it from reporting errors for props using `VueTypes` namespaced validators (like `VueTypes.string` or `VueTypes.oneOf([...])`).
 
-## Default usage
-
-In your eslint configuration add `plugin:vue-types/strongly-recommended` after any `plugin:vue/*` preset.
+It also allows individually imported validators like in the following example:
 
 ```js
-module.exports = {
-  extends: [
-    // ...
-    'plugin:vue/strongly-recommended'
-    'plugin:vue-types/strongly-recommended'
-  ],
-  //...
+import { string } from 'vue-types'
+
+export default {
+  props: {
+    msg: string().isRequired, // no error reported
+  },
 }
 ```
 
-## Custom `vue-types` namespaces
+## Default usage
+
+In your eslint configuration add `plugin:vue-types/strongly-recommended` **after** any `plugin:vue/*` preset.
+
+```json
+{
+  "extends": [
+    "plugin:vue/strongly-recommended",
+    "plugin:vue-types/strongly-recommended"
+  ]
+}
+```
+
+## Customization
+
+### Custom namespaces
 
 By default `vue-types/require-default-prop` will not report `vue-types` when used with the `VueTypes` namespace.
 
@@ -49,27 +62,24 @@ import VueTypes from 'vue-types'
 const theme = VueTypes.oneOf(['dark', 'light'])
 
 export default {
-
   props: {
     name: VueTypes.string, // <-- not an error
     theme, // <-- error
-  }
-
+  },
 }
 ```
 
-To prevent this error you can wrap custom definition in a namespace and add it to the plugin's whitelist:
+To prevent this error you can wrap custom definition in a namespace and add it to the plugin's allowed namespaces:
 
-```js
-// .eslint.rc.js
-module.exports = {
-  extends: [
-    // ...
-    'plugin:vue/strongly-recommended'
-    'plugin:vue-types/strongly-recommended'
+```json
+// .eslintrc.json
+{
+  "extends": [
+    "plugin:vue/strongly-recommended",
+    "plugin:vue-types/strongly-recommended"
   ],
-  settings: {
-    'vue-types/namespace': ['VueTypes', 'AppTypes']
+  "settings": {
+    "vue-types/namespace": ["AppTypes"]
   }
 }
 ```
@@ -78,21 +88,52 @@ module.exports = {
 import VueTypes from 'vue-types'
 
 const AppTypes = {
-  theme: VueTypes.oneOf(['dark', 'light'])
+  theme: VueTypes.oneOf(['dark', 'light']),
 }
 
 export default {
-
   props: {
     name: VueTypes.string, // <-- not an error
     theme: AppTypes.theme, // <-- not an error
-  }
-
+  },
 }
 ```
+
+### Custom import sources
+
+By default `vue-types/require-default-prop` will not report VueTypes individual validators when imported from the `vue-types` module.
+
+To extend this feature to other modules, include them in the `vue-types/sources` setting:
+
+```json
+// .eslintrc.json
+{
+  "extends": [
+    "plugin:vue/strongly-recommended",
+    "plugin:vue-types/strongly-recommended"
+  ],
+  "settings": {
+    "vue-types/sources": ["~/utils/prop-types"]
+  }
+}
+```
+
+```js
+import { string } from 'vue-types'
+import { myValidator } from '~/utils/prop-types'
+
+export default {
+  props: {
+    name: string(), // <-- not an error
+    msg: myValidator(), // <-- custom validator, not an error
+  },
+}
+```
+
+**Note**: This feature is only available for [static import statements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2018 Marco Solazzi
+Copyright (c) 2020 Marco Solazzi

@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue-types",
-  "version": "1.0.1",
+  "version": "2.0.0-rc.0",
   "description": "eslint-plugin-vue integration plugin for vue-types",
   "author": "Marco Solazzi",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "lib"
   ],
   "engines": {
-    "node": ">=6"
+    "node": ">=10"
   },
   "scripts": {
     "prepublishOnly": "npm run lint && npm run test",
@@ -31,17 +31,20 @@
     "url": "https://github.com/dwightjack/eslint-plugin-vue-types.git"
   },
   "peerDependencies": {
-    "eslint": "^3.18.0 || ^4.0.0 || ^5.0.0",
-    "eslint-plugin-vue": "^4.0.0 || ^5.0.0"
+    "eslint": ">=5.0.0",
+    "eslint-plugin-vue": ">=6.0.0"
   },
   "bugs": "https://github.com/dwightjack/eslint-plugin-vue-types/issues",
   "devDependencies": {
-    "@typescript-eslint/parser": "^1.10.2",
-    "eslint": "^4.7.0",
-    "eslint-plugin-vue": "^4.5.0",
-    "eslint-plugin-vue-libs": "^3.0.0",
+    "@typescript-eslint/parser": "^3.6.0",
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.2",
     "mocha": "^5.2.0",
-    "typescript": "^3.5.2"
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.6"
   },
   "dependencies": {
     "eslint-rule-composer": "^0.3.0"
