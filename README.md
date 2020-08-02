@@ -39,13 +39,13 @@ export default {
 
 ## Default usage
 
-In your eslint configuration add `plugin:vue-types/strongly-recommended` **after** any `plugin:vue/*` preset.
+In your eslint configuration add `plugin:vue-types/recommended` **after** any `plugin:vue/*` preset.
 
 ```json
 {
   "extends": [
-    "plugin:vue/strongly-recommended",
-    "plugin:vue-types/strongly-recommended"
+    "plugin:vue/recommended",
+    "plugin:vue-types/recommended"
   ]
 }
 ```
@@ -75,8 +75,8 @@ To prevent this error you can wrap custom validators in a namespace and add it t
 // .eslintrc.json
 {
   "extends": [
-    "plugin:vue/strongly-recommended",
-    "plugin:vue-types/strongly-recommended"
+    "plugin:vue/recommended",
+    "plugin:vue-types/recommended"
   ],
   "settings": {
     "vue-types/namespace": ["AppTypes"]
@@ -109,8 +109,8 @@ To extend this feature to other modules, include them in the `vue-types/sources`
 // .eslintrc.json
 {
   "extends": [
-    "plugin:vue/strongly-recommended",
-    "plugin:vue-types/strongly-recommended"
+    "plugin:vue/recommended",
+    "plugin:vue-types/recommended"
   ],
   "settings": {
     "vue-types/sources": ["~/utils/prop-types"]
