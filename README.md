@@ -2,6 +2,14 @@
 
 > ESLint plugin for [vue-types](https://github.com/dwightjack/vue-types) and [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)
 
+## Note: this project has been archived.
+
+Since `eslint-plugin-vue@5`, the `vue/require-default-prop` rule ignores props assignment by call expressions (`VueTypes.arrayOf(String)`) or object properties (`VueTypes.array`). So you don't need this plugin anymore.
+
+**If you are using an older version of `eslint-plugin-vue` consider upgrading it.**
+
+`--- Original Documentation ---`
+
 **Warning: This is the documentation for eslint-plugin-vue-types@^2.0.0. The documentation for v.1 is available [here](https://github.com/dwightjack/eslint-plugin-vue-types/blob/v1/README.md).**
 
 This plugin should be used alongside [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) to validate usages of [vue-types](https://github.com/dwightjack/vue-types) on prop definitions (see [this issue](https://github.com/dwightjack/vue-types/issues/29) for details).
@@ -43,10 +51,7 @@ In your eslint configuration add `plugin:vue-types/recommended` **after** any `p
 
 ```json
 {
-  "extends": [
-    "plugin:vue/recommended",
-    "plugin:vue-types/recommended"
-  ]
+  "extends": ["plugin:vue/recommended", "plugin:vue-types/recommended"]
 }
 ```
 
@@ -74,10 +79,7 @@ To prevent this error you can wrap custom validators in a namespace and add it t
 ```json
 // .eslintrc.json
 {
-  "extends": [
-    "plugin:vue/recommended",
-    "plugin:vue-types/recommended"
-  ],
+  "extends": ["plugin:vue/recommended", "plugin:vue-types/recommended"],
   "settings": {
     "vue-types/namespace": ["AppTypes"]
   }
@@ -108,10 +110,7 @@ To extend this feature to other modules, include them in the `vue-types/sources`
 ```json
 // .eslintrc.json
 {
-  "extends": [
-    "plugin:vue/recommended",
-    "plugin:vue-types/recommended"
-  ],
+  "extends": ["plugin:vue/recommended", "plugin:vue-types/recommended"],
   "settings": {
     "vue-types/sources": ["~/utils/prop-types"]
   }
