@@ -32,7 +32,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - run: npm ci
-      - run: npm lint
+      - run: npm run lint
       - run: npm test
       - run: git config --global user.name "GitHub Release Bot"
       - run: git config --global user.email "github-release-bot@codeful.dev"
