@@ -75,6 +75,19 @@ ruleTester.run('require-default-prop', rule, {
         }
       `,
     },
+    {
+      filename: 'test.vue',
+      code: `
+
+        const demo = () => VueTypes.string
+
+        export default {
+          props: {
+            a: demo().isRequired
+          }
+        }
+      `,
+    },
   ],
 
   invalid: [
@@ -86,7 +99,7 @@ ruleTester.run('require-default-prop', rule, {
 
         export default {
           props: {
-            a: demo().isRequired
+            a: demo().isRequired.loose
           }
         }
       `,
@@ -180,6 +193,17 @@ ruleTesterImport.run('require-default-prop imported validators', rule, {
         }
       `,
     },
+    {
+      filename: 'test.vue',
+      code: `
+      import { positive } from '@/myprops'
+      export default {
+        props: {
+          a: positive().isRequired,
+        }
+      }
+      `,
+    },
   ],
 
   invalid: [
@@ -190,7 +214,7 @@ ruleTesterImport.run('require-default-prop imported validators', rule, {
       import { positive } from '@/myprops'
       export default {
         props: {
-          a: positive().isRequired,
+          a: positive().isRequired.loose,
         }
       }
     `,

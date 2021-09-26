@@ -2,9 +2,9 @@
 
 > ESLint plugin for [vue-types](https://github.com/dwightjack/vue-types) and [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)
 
-## Note: this project has been archived.
+## eslint-plugin-vue version note
 
-Since `eslint-plugin-vue@5`, the `vue/require-default-prop` rule ignores props assignment by call expressions (`VueTypes.arrayOf(String)`) or object properties (`VueTypes.array`). So you don't need this plugin anymore.
+Since `eslint-plugin-vue@7`, the `vue/require-default-prop` rule ignores props assignment by call expressions (`VueTypes.arrayOf(String)`) or object properties (`VueTypes.array`). So you don't need this plugin anymore.
 
 **If you are using an older version of `eslint-plugin-vue` consider upgrading it.**
 
@@ -12,11 +12,11 @@ Since `eslint-plugin-vue@5`, the `vue/require-default-prop` rule ignores props a
 
 **Warning: This is the documentation for eslint-plugin-vue-types@^2.0.0. The documentation for v.1 is available [here](https://github.com/dwightjack/eslint-plugin-vue-types/blob/v1/README.md).**
 
-This plugin should be used alongside [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) to validate usages of [vue-types](https://github.com/dwightjack/vue-types) on prop definitions (see [this issue](https://github.com/dwightjack/vue-types/issues/29) for details).
+This plugin should be used alongside [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) to allow the usage of [vue-types](https://github.com/dwightjack/vue-types) validators as valid prop definitions with the [] rule (see [vue-types#29](https://github.com/dwightjack/vue-types/issues/29) and [vue-types#179](https://github.com/dwightjack/vue-types/issues/179) for details).
 
 ## Requirements
 
-- [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) `>=6.0.0`
+- [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) `^6.0.0`
 
 * [ESLint](http://eslint.org/) `>=5.0.0`.
 * Node.js `>=10.0.0`
@@ -31,27 +31,41 @@ npm install --save-dev eslint eslint-plugin-vue eslint-plugin-vue-types
 
 This plugin provides a single rule: `vue-types/require-default-prop`.
 
-The rule extends [`vue/require-default-prop`](https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/require-default-prop.md) preventing it from reporting errors for props defined with `VueTypes` namespaced validators (like `VueTypes.string` or `VueTypes.oneOf([...])`).
-
-It also allows individually imported validators like in the following example:
-
-```js
-import { string } from 'vue-types'
-
-export default {
-  props: {
-    msg: string().isRequired, // no error reported
-  },
-}
-```
-
-## Default usage
+The rule extends [`vue/require-default-prop`](https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/require-default-prop.md) preventing it from reporting errors for props defined with `VueTypes` namespaced validators (like `VueTypes.string` or `VueTypes.oneOf([...])`). It also allows individually imported validators.
 
 In your eslint configuration add `plugin:vue-types/recommended` **after** any `plugin:vue/*` preset.
 
 ```json
 {
   "extends": ["plugin:vue/recommended", "plugin:vue-types/recommended"]
+}
+```
+
+This will filter errors for prop definitions like:
+
+```js
+import VueTypes, { string } from 'vue-types'
+
+export default {
+  props: {
+    msg1: string().isRequired, // no error reported
+    msg2: VueTypes.string, // no error reported
+    msg3: VueTypes.shape({}).loose.isRequired, // no error reported
+  },
+}
+```
+
+**Note:** For this plugin to work properly, ensure that the `.isRequired` flag always comes last in the chain:
+
+```js
+import { shape } from 'vue-types'
+
+export default {
+  props: {
+    msg1: shape({ ... }).loose.isRequired, // no error reported
+
+    msg2: shape({}).isRequired.loose, // ERROR!
+  },
 }
 ```
 
@@ -135,4 +149,4 @@ export default {
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2018-2020 Marco Solazzi
+Copyright (c) 2018-2021 Marco Solazzi
